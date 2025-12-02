@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kineticus Library</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #05070c;
+      --bg-card: #fdfdfd;
+      --primary: #1b7dff;
+      --primary-soft: rgba(27, 125, 255, 0.12);
+      --text-main: #f5f7ff;
+      --text-muted: #a1acc7;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --radius-xl: 28px;
+      --shadow-soft: 0 24px 80px rgba(0,0,0,0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #101522 0, #05070c 55%, #000000 100%);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px 16px 60px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+    }
+
+    /* Header / logo */
+
+    .logo-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-row img {
+      height: 42px;
+    }
+
+    .logo-pill {
+      padding: 6px 14px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(0,0,0,0.6));
+      color: var(--text-muted);
+    }
+
+    /* Hero text */
+
+    .hero {
+      text-align: center;
+      max-width: 680px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 4vw, 36px);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(120deg, #4fa3ff, #00e0ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .hero p strong {
+      color: #e5ecff;
+      font-weight: 500;
+    }
+
+    /* Card */
+
+    .library-card {
+      margin-top: 16px;
+      width: 100%;
+      background: radial-gradient(circle at top left, #ffffff 0, #f3f4fb 35%, #e9ebf7 70%, #dde0f0 100%);
+      border-radius: var(--radius-xl);
+      padding: 28px 26px 26px;
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .library-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: conic-gradient(from 220deg, rgba(0,128,255,0.12), transparent 40%, rgba(0,255,255,0.12), transparent 70%);
+      opacity: 0.7;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+
+    .library-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .library-header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .library-title-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .library-title-block h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #141726;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .library-title-block span {
+      font-size: 13px;
+      color: #5e6481;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-size: 11px;
+      border-radius: 999px;
+      padding: 6px 12px;
+      border: 1px solid rgba(20,23,38,0.08);
+      background: rgba(255,255,255,0.75);
+      color: #333952;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .chip-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--primary);
+    }
+
+    /* Resource grid */
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .resource-card {
+      border-radius: 18px;
+      padding: 14px 14px 16px;
+      background: rgba(255,255,255,0.96);
+      border: 1px solid rgba(12,20,48,0.06);
+      box-shadow: 0 10px 30px rgba(12,20,48,0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s ease-out, box-shadow 0.15s ease-out, border-color 0.15s ease-out;
+    }
+
+    .resource-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(12,20,48,0.15);
+      border-color: rgba(27,125,255,0.3);
+    }
+
+    .resource-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .resource-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--primary-soft);
+      color: #0350b4;
+      font-weight: 600;
+    }
+
+    .resource-label {
+      font-size: 11px;
+      color: #727892;
+    }
+
+    .resource-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #15192b;
+      margin-bottom: 4px;
+    }
+
+    .resource-desc {
+      font-size: 13px;
+      line-height: 1.5;
+      color: #5b6177;
+      margin-bottom: 10px;
+    }
+
+    .resource-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .pill-count {
+      font-size: 11px;
+      color: #8b92aa;
+    }
+
+    .resource-link {
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: none;
+      outline: none;
+      background: #141726;
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.24);
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, background 0.12s ease-out;
+    }
+
+    .resource-link span.icon {
+      display: inline-block;
+      transform: translateY(1px);
+    }
+
+    .resource-link:hover {
+      background: #1b233b;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.28);
+    }
+
+    /* Footer */
+
+    .footer {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #707892;
+      text-align: center;
+    }
+
+    .footer span {
+      color: #b6c1ff;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding-top: 28px;
+      }
+      .library-card {
+        padding: 20px 18px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="logo-row">
+      <img src="kineticus_logo_blue.png" alt="Kineticus logo" />
+      <div class="logo-pill">Kineticus • Tools & Systems</div>
+    </div>
+
+    <section class="hero">
+      <h1>The <span>Kineticus Library</span></h1>
+      <p>
+        Playbooks, automations and swipe files we actually use
+        to build trust-led growth engines for B2B companies.
+        <br />
+        <strong>Everything in one place.</strong>
+      </p>
+    </section>
+
+    <section class="library-card">
+      <div class="library-inner">
+        <header class="library-header">
+          <div class="library-title-block">
+            <h2>Library</h2>
+            <span>Browse by tool, workflow or guide.</span>
+          </div>
+          <div class="chip-row">
+            <div class="chip">
+              <span class="chip-dot"></span> AI Workflows
+            </div>
+            <div class="chip">
+              <span class="chip-dot"></span> Playbooks
+            </div>
+            <div class="chip">
+              <span class="chip-dot"></span> Templates
+            </div>
+          </div>
+        </header>
+
+        <div class="resource-grid">
+          <!-- CARD 1 -->
+          <article class="resource-card">
+            <div>
+              <div class="resource-meta">
+                <span class="resource-tag">Workflow</span>
+                <span class="resource-label">n8n + GPT</span>
+              </div>
+              <h3 class="resource-title">LinkedIn Intent Scanner</h3>
+              <p class="resource-desc">
+                Reads your full DM history, ranks conversations by buying intent,
+                and gives you a daily follow-up list.
+              </p>
+            </div>
+            <div class="resource-footer">
+              <span class="pill-count">Setup guide + workflow JSON</span>
+              <a class="resource-link" href="#" target="_blank" rel="noopener">
+                Open <span class="icon">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- CARD 2 -->
+          <article class="resource-card">
+            <div>
+              <div class="resource-meta">
+                <span class="resource-tag">Playbook</span>
+                <span class="resource-label">PDF • Notion</span>
+              </div>
+              <h3 class="resource-title">Trust-Led Growth Engine</h3>
+              <p class="resource-desc">
+                The core framework we use to turn one good idea into a full
+                inbound system: content, nurture, and offers.
+              </p>
+            </div>
+            <div class="resource-footer">
+              <span class="pill-count">Framework + examples</span>
+              <a class="resource-link" href="#" target="_blank" rel="noopener">
+                View <span class="icon">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- CARD 3 -->
+          <article class="resource-card">
+            <div>
+              <div class="resource-meta">
+                <span class="resource-tag">Template</span>
+                <span class="resource-label">Prompt Pack</span>
+              </div>
+              <h3 class="resource-title">ChatGPT Output Engineering 101</h3>
+              <p class="resource-desc">
+                Prompt system for defining “done”, removing ambiguity and
+                getting consistent, high-quality outputs from AI.
+              </p>
+            </div>
+            <div class="resource-footer">
+              <span class="pill-count">Prompt file + examples</span>
+              <a class="resource-link" href="#" target="_blank" rel="noopener">
+                Download <span class="icon">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- CARD 4 -->
+          <article class="resource-card">
+            <div>
+              <div class="resource-meta">
+                <span class="resource-tag">System</span>
+                <span class="resource-label">AI Receptionist</span>
+              </div>
+              <h3 class="resource-title">Jess – Call Booking System</h3>
+              <p class="resource-desc">
+                Full stack for the AI receptionist: scripts, prompts and
+                instructions to plug it into your own calendar.
+              </p>
+            </div>
+            <div class="resource-footer">
+              <span class="pill-count">Scripts + setup video</span>
+              <a class="resource-link" href="#" target="_blank" rel="noopener">
+                Access <span class="icon">↗</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Add more cards below this line -->
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      Curated by <span>Kineticus</span> · Updated manually when we build new stuff.
+    </div>
+  </div>
+</body>
+</html>
