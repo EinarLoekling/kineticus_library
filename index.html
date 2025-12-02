@@ -7,30 +7,21 @@
   <style>
     :root {
       --bg: #05070b;
-      --bg-elevated: #0d1018;
-      --card: #11141f;
       --accent: #29a3ff;
       --accent-soft: rgba(41,163,255,0.12);
       --text-main: #f7f9ff;
       --text-muted: #9fa6c0;
       --border-subtle: #1f2433;
-      --radius-lg: 24px;
       --radius-md: 16px;
       --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.6);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Inter", sans-serif;
+      font-family: system-ui, sans-serif;
       background: radial-gradient(circle at top, #131627 0, #05070b 55%);
       color: var(--text-main);
-      min-height: 100vh;
     }
 
     .page {
@@ -39,58 +30,32 @@
       padding: 32px 16px 64px;
     }
 
-    /* HEADER */
-
     .header {
       display: flex;
       align-items: center;
       gap: 16px;
-      margin-bottom: 8px;
     }
 
-    .logo {
-      height: 40px;
-    }
-
+    .logo { height: 40px; }
     .brand-text {
-      font-size: 14px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+      font-size: 14px; color: var(--text-muted);
+      letter-spacing: 0.3em; text-transform: uppercase;
     }
 
     .title-block {
       margin-top: 32px;
-      margin-bottom: 32px;
       text-align: center;
     }
-
     .title-block h1 {
-      font-size: clamp(32px, 4vw, 40px);
-      font-weight: 700;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
+      font-size: 40px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.07em;
     }
-
-    .title-block h1 span {
-      color: var(--accent);
-    }
-
-    .title-block p {
-      margin-top: 12px;
-      font-size: 15px;
-      color: var(--text-muted);
-    }
-
-    /* GRID */
+    .title-block h1 span { color: var(--accent); }
 
     .section-title {
-      margin-top: 40px;
-      margin-bottom: 10px;
-      font-size: 15px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+      margin-top: 40px; margin-bottom: 10px;
+      color: var(--text-muted); text-transform: uppercase;
+      font-size: 15px; letter-spacing: 0.2em;
     }
 
     .grid {
@@ -100,19 +65,13 @@
       margin-top: 24px;
     }
 
-    /* CARD */
-
     .tool-card {
       background: radial-gradient(circle at top left, #222a3f 0, #101320 45%, #06070c 100%);
       border-radius: var(--radius-md);
-      padding: 18px 18px 20px;
+      padding: 20px;
       border: 1px solid var(--border-subtle);
       box-shadow: var(--shadow-soft);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      position: relative;
-      overflow: hidden;
+      display: flex; flex-direction: column;
     }
 
     .pill {
@@ -127,99 +86,48 @@
       border: 1px solid rgba(41,163,255,0.35);
     }
 
-    .tool-title {
-      font-size: 16px;
-      font-weight: 600;
-    }
+    .tool-title { font-size: 17px; font-weight: 600; margin-top: 6px; }
+    .tool-desc { color: var(--text-muted); font-size: 13px; margin-top: 6px; line-height: 1.4; }
 
-    .tool-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-
-    .meta-line {
-      display: flex;
-      gap: 8px;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
+    .meta-line { margin-top: 8px; display: flex; gap: 8px; font-size: 11px; color: var(--text-muted); }
     .meta-tag {
-      padding: 3px 8px;
-      border-radius: 999px;
+      padding: 3px 8px; border-radius: 999px;
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.06);
     }
 
     .card-footer {
-      margin-top: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
+      margin-top: 12px;
+      display: flex; justify-content: space-between; align-items: center;
     }
 
     .btn {
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: none;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
+      padding: 7px 14px; border-radius: 999px; border: none;
       background: linear-gradient(135deg, #1f7bff, #29d3ff);
-      color: #fff;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      color: white; text-decoration: none;
+      font-size: 13px; font-weight: 500;
       box-shadow: 0 10px 25px rgba(34,139,230,0.5);
-      transition: transform 0.12s ease, box-shadow 0.12s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(34,139,230,0.7);
-    }
-
-    .btn span.icon {
-      font-size: 14px;
-      line-height: 0;
+      display: inline-flex; gap: 6px; align-items: center;
     }
 
     .subtle-link {
-      font-size: 12px;
-      color: var(--text-muted);
-      text-decoration: none;
+      font-size: 12px; color: var(--text-muted); text-decoration: none;
     }
-
-    .subtle-link:hover {
-      text-decoration: underline;
-    }
-
-    /* FOOTER */
+    .subtle-link:hover { text-decoration: underline; }
 
     footer {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    @media (max-width: 600px) {
-      .page {
-        padding-inline: 14px;
-      }
+      margin-top: 40px; text-align: center;
+      font-size: 11px; color: var(--text-muted);
     }
   </style>
 </head>
 
 <body>
   <div class="page">
-    <!-- HEADER -->
+
     <header>
       <div class="header">
-        <img src="assets/kineticus_logo_blue.png" alt="Kineticus logo" class="logo" />
+        <img src="assets/kineticus_logo_blue.png" class="logo" />
         <div class="brand-text">KINETICUS</div>
       </div>
 
@@ -229,111 +137,54 @@
       </div>
     </header>
 
-    <!-- ========================= -->
-    <!--       AI SYSTEMS          -->
-    <!-- ========================= -->
+    <!-- AI SYSTEMS -->
     <h2 class="section-title">AI Systems</h2>
     <div class="grid">
 
-      <!-- EXAMPLE CARD 1 -->
+      <!-- NEW: AI Receptionist -->
       <article class="tool-card">
         <div class="pill">AI Receptionist</div>
         <div class="tool-title">Jess – Inbound Call Booking System</div>
-        <p class="tool-desc">
-          Setup for the $5/month AI receptionist: script, workflows, and integration notes.
-        </p>
+        <p class="tool-desc">The full system for your $5/month AI receptionist.</p>
+
         <div class="meta-line">
           <span class="meta-tag">Automation</span>
-          <span class="meta-tag">Implementation</span>
+          <span class="meta-tag">n8n</span>
         </div>
-        <div class="card-footer">
-          <a class="btn" href="jess.html">
-            <span class="icon">↗</span> Open Playbook
-          </a>
-          <a class="subtle-link" href="https://your-notion-link.com" target="_blank">
-            View in Notion
-          </a>
-        </div>
-      </article>
 
-      <!-- EXAMPLE CARD 2 -->
-      <article class="tool-card">
-        <div class="pill">Inbox Revival</div>
-        <div class="tool-title">LinkedIn Intent Scanner</div>
-        <p class="tool-desc">
-          Scans your entire inbox, ranks by buying intent, and tells you who to follow up with today.
-        </p>
-        <div class="meta-line">
-          <span class="meta-tag">Sales</span>
-          <span class="meta-tag">n8n Workflow</span>
-        </div>
         <div class="card-footer">
-          <a class="btn" href="intent-scanner.html">
-            <span class="icon">↗</span> View System
-          </a>
-          <a class="subtle-link" href="#">Setup Guide</a>
+          <a class="btn" href="ai-receptionist.html"><span class="icon">↗</span> Open</a>
+          <a class="subtle-link" href="https://hip-freon-7f6.notion.site/ebd/2bb9aa256fde8051ba47ddc37474bff2" target="_blank">View in Notion</a>
         </div>
       </article>
 
     </div>
 
 
-    <!-- ========================= -->
-    <!--   STRATEGY & PSYCHOLOGY  -->
-    <!-- ========================= -->
+    <!-- STRATEGY -->
     <h2 class="section-title">Strategy & Psychology</h2>
     <div class="grid">
 
+      <!-- NEW: Credibility Economy -->
       <article class="tool-card">
         <div class="pill">Mental Models</div>
-        <div class="tool-title">Credibility Economy</div>
-        <p class="tool-desc">
-          Why trust becomes the ultimate moat in the AI age — and how to build it.
-        </p>
+        <div class="tool-title">The Credibility Economy</div>
+        <p class="tool-desc">Why trust becomes the ultimate moat in the AI age — and how to build it.</p>
+
         <div class="meta-line">
           <span class="meta-tag">Psychology</span>
           <span class="meta-tag">Positioning</span>
         </div>
+
         <div class="card-footer">
-          <a class="btn" href="credibility-economy.html">
-            <span class="icon">↗</span> Open Notes
-          </a>
-          <a class="subtle-link" href="#" target="_blank">Notion Version</a>
+          <a class="btn" href="credibility-economy.html"><span class="icon">↗</span> Open</a>
+          <a class="subtle-link" href="https://hip-freon-7f6.notion.site/ebd/2939aa256fde80a391efe13646fb1652" target="_blank">View in Notion</a>
         </div>
       </article>
 
     </div>
 
-
-    <!-- ========================= -->
-    <!--      MARKETING OPS       -->
-    <!-- ========================= -->
-    <h2 class="section-title">Marketing Playbooks</h2>
-    <div class="grid">
-
-      <article class="tool-card">
-        <div class="pill">Funnels</div>
-        <div class="tool-title">Trust-Led Inbound Engine</div>
-        <p class="tool-desc">
-          Build the full inbound system: content swarm → lead magnet → segmentation → nurture → conversion.
-        </p>
-        <div class="meta-line">
-          <span class="meta-tag">B2B</span>
-          <span class="meta-tag">Content</span>
-        </div>
-        <div class="card-footer">
-          <a class="btn" href="trust-led-engine.html">
-            <span class="icon">↗</span> View Playbook
-          </a>
-          <a class="subtle-link" href="#">Templates</a>
-        </div>
-      </article>
-
-    </div>
-
-    <footer>
-      Kineticus Library • Updated by Einar & Espen
-    </footer>
+    <footer>Kineticus Library • Updated by Einar & Espen</footer>
   </div>
 </body>
 </html>
